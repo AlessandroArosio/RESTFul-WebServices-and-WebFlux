@@ -26,7 +26,7 @@ jobs:
     steps:
       - checkout
       - codecov/upload:
-            flags: backend,unittest
+          file: {{ build/reports/cobertura/coverage.xml }}
 
       # Download and cache dependencies
       - restore_cache:
@@ -44,7 +44,3 @@ jobs:
 
       # run tests!
       - run: ./gradlew test cobertura
-
-      - codecov/upload:
-          file: coverage/*.json
-          flags: frontend
