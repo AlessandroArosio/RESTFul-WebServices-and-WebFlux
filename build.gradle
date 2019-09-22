@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.1.8.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id 'java'
+    id "net.saliman.cobertura" version "2.6.1"
 }
 
 group = 'guru.springframework'
@@ -22,3 +23,12 @@ dependencies {
     testImplementation 'io.projectreactor:reactor-test'
     testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
 }
+
+cobertura {
+    coverageFormats = ['html', 'xml']
+    coverageIgnoreTrivial = true
+    coverageIgnores = ['org.slf4j.Logger.*']
+    coverageReportDir = new File("$buildDir/reports/cobertura")
+}
+
+test.finalizedBy(project.tasks.cobertura)
